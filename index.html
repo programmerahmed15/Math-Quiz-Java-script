@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            text-align: center;
+            background-color: aquamarine;
+        }
+        .quiz-container {
+            margin-top: 200px;
+        }
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .input-container {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            width: 120px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 20px;
+            border: lightcyan;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="question" id="question">Question will appear here</div>
+    <div class="input-container">
+        <input type="text" id="answer" placeholder="Your answer">
+    </div>
+    <button onclick="checkAnswer()">Submit</button>
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    let num1, num2, correctAnswer;
+
+    function generateQuestion() {
+        num1 = Math.floor(Math.random() * 10) + 1;
+        num2 = Math.floor(Math.random() * 10) + 1;
+        correctAnswer = num1 + num2;
+        document.getElementById('question').textContent = `What is ${num1} + ${num2}?`;
+        document.getElementById('result').textContent = '';
+        document.getElementById('answer').value = '';
+    }
+
+    function checkAnswer() {
+        const userAnswer = parseInt(document.getElementById('answer').value);
+        const resultElement = document.getElementById('result');
+        if (userAnswer === correctAnswer) {
+            resultElement.textContent = 'Correct!';
+            resultElement.style.color = 'green';
+        } else {
+            resultElement.textContent = `Wrong! The correct answer is ${correctAnswer}.`;
+            resultElement.style.color = 'red';
+        }
+        setTimeout(generateQuestion, 2000);
+    }
+
+    // Generate the first question on page load
+    window.onload = generateQuestion;
+</script>
+
+</body>
+</html>
